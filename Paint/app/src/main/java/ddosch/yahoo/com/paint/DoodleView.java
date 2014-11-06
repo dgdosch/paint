@@ -11,7 +11,10 @@ import android.view.View;
  */
 public class DoodleView extends View {
 
-    Paint paint;
+    Paint paint5;
+    Paint paint2;
+    Paint erase;
+    Paint paintToUse;
     Path path;
 
     public DoodleView(Context context) {
@@ -20,10 +23,22 @@ public class DoodleView extends View {
 
     public DoodleView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        paint = new Paint();
-        paint.setColor(Color.BLUE);
-        paint.setStrokeWidth(5);
-        paint.setStyle(Paint.Style.FILL);
+        paint5 = new Paint();
+        paint5.setColor(Color.BLUE);
+        paint5.setStrokeWidth(10);
+        paint5.setStyle(Paint.Style.STROKE);
+
+        paint2 = new Paint();
+        paint2.setColor(Color.RED);
+        paint2.setStrokeWidth(3);
+        paint2.setStyle(Paint.Style.STROKE);
+
+        erase = new Paint();
+        erase.setColor(Color.WHITE);
+        erase.setStrokeWidth(50);
+        erase.setStyle(Paint.Style.STROKE);
+
+        paintToUse = paint5;
 
         path = new Path();
 
@@ -35,8 +50,9 @@ public class DoodleView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-//        canvas.drawCircle(200, 200, 100, paint);
-        canvas.drawPath(path, paint);
+//        canvas.drawCircle(200, 200, 100, paint5);
+        canvas.drawPath(path, paintToUse);
+//        canvas.drawPath(path, paint2);
     }
 
     @Override
@@ -54,5 +70,9 @@ public class DoodleView extends View {
                 return false;
         }
         return false;
+    }
+
+    public void switchPaint(boolean useEraser) {
+        paintToUse = useEraser ? erase : paint5;
     }
 }

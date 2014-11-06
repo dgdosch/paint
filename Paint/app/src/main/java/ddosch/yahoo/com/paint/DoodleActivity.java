@@ -4,14 +4,23 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Switch;
 
 
 public class DoodleActivity extends Activity {
+
+    private Switch colorSwitch;
+    private DoodleView doodleView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doodle);
+        colorSwitch = (Switch)findViewById(R.id.switch1);
+        doodleView = (DoodleView)findViewById(R.id.DoodleView);
+
+
     }
 
 
@@ -32,5 +41,10 @@ public class DoodleActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onSwitch(View v){
+
+    doodleView.switchPaint(colorSwitch.isChecked());
     }
 }
